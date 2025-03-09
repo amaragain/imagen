@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     const API_BASE_URL = 'http://imagen.us-east-1.elasticbeanstalk.com/api';
     let accessToken = localStorage.getItem('accessToken');
     let refreshToken = localStorage.getItem('refreshToken');
@@ -22,7 +22,7 @@ $(document).ready(function() {
         $('#navMenu').html(isLoggedIn ? loggedInMenu : loggedOutMenu);
 
         // Logout handler
-        $('#logout').click(function(e) {
+        $('#logout').click(function (e) {
             e.preventDefault();
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
@@ -34,7 +34,7 @@ $(document).ready(function() {
     updateNav();
 
     // Theme toggle
-    $('#themeToggle').click(function() {
+    $('#themeToggle').click(function () {
         $('body').toggleClass('bright-mode dark-mode');
         $(this).toggleClass('btn-light btn-dark');
         $('.bright-icon').toggle();
@@ -63,7 +63,7 @@ $(document).ready(function() {
     };
 
     // Refresh token function
-    window.refreshAccessToken = function(callback) {
+    window.refreshAccessToken = function (callback) {
         const currentRefreshToken = window.getRefreshToken();
         if (!currentRefreshToken) {
             window.location.href = 'login.html';
@@ -75,11 +75,11 @@ $(document).ready(function() {
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ refreshToken: currentRefreshToken }),
-            success: function(response) {
+            success: function (response) {
                 window.setTokens(response.accessToken, null); // Refresh token might not be renewed
                 if (callback) callback();
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 console.error('Token refresh failed:', xhr.responseJSON?.error);
                 localStorage.removeItem('accessToken');
                 localStorage.removeItem('refreshToken');
@@ -91,15 +91,9 @@ $(document).ready(function() {
     };
 
 
-    var settings = {
-        "url": "http://imagen.us-east-1.elasticbeanstalk.com/api/test-cors",
-        "method": "GET",
-        "timeout": 0,
-      };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-      });
+    fetch('http://imagen.us-east-1.elasticbeanstalk.com/api/test-cors')
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
 
-      
 });
