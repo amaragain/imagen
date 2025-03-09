@@ -89,4 +89,17 @@ $(document).ready(function() {
             }
         });
     };
+
+
+    var settings = {
+        "url": "http://imagen.us-east-1.elasticbeanstalk.com/api/test-cors",
+        "method": "GET",
+        "timeout": 0,
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+
+      
 });
