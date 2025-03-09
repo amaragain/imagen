@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    const API_BASE_URL = 'http://localhost:3030/api';
+    const API_BASE_URL = 'http://imagen.us-east-1.elasticbeanstalk.com/api';
     let accessToken = localStorage.getItem('accessToken');
     let refreshToken = localStorage.getItem('refreshToken');
     let isLoggedIn = !!accessToken;
